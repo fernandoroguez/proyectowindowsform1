@@ -1,0 +1,17 @@
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\bin\Debug\net6.0-windows\proyecto_wondows_form_1.exe
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\bin\Debug\net6.0-windows\proyecto_wondows_form_1.deps.json
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\bin\Debug\net6.0-windows\proyecto_wondows_form_1.runtimeconfig.json
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\bin\Debug\net6.0-windows\proyecto_wondows_form_1.dll
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\bin\Debug\net6.0-windows\proyecto_wondows_form_1.pdb
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.Form1.resources
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.csproj.GenerateResource.cache
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.AssemblyInfoInputs.cache
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.AssemblyInfo.cs
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.csproj.CoreCompileInputs.cache
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.dll
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\refint\proyecto_wondows_form_1.dll
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.pdb
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.genruntimeconfig.cache
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\ref\proyecto_wondows_form_1.dll
+C:\Users\ferna\Desktop\2 DAM\DI\Proyecto 1 windows form\proyecto_wondows_form_1\proyecto_wondows_form_1\obj\Debug\net6.0-windows\proyecto_wondows_form_1.Properties.Resources.resources
