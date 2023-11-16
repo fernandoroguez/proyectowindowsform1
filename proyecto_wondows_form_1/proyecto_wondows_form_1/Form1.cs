@@ -5,6 +5,7 @@ namespace proyecto_wondows_form_1
     public partial class Form1 : Form
     {
 
+       
         List<Hardware> lista;
 
         int index = 0;
@@ -15,42 +16,68 @@ namespace proyecto_wondows_form_1
         {
             InitializeComponent();
             lista = new List<Hardware>();
-            cargar();
+            //en cuanto inicio el programa lo primero que hago es cargar los archivos del fichero
+           // cargar();
             mostrar();
         }
 
-
         public void mostrar()
         {
-            Hardware h = lista[index];
-            txtcodigo.Text = Convert.ToString(lista[index].getid());
-            txtfabricante.Text = Convert.ToString(lista[index].getId_productor());
-            txtnombre.Text = lista[index].getnombre();
-            txtPrecio.Text = Convert.ToString(lista[index].getprecio());
-            if (lista[index].getstock())
+            try
             {
-                ckbstock.Checked = true;
-            }
-            else
+                
+
+                Hardware h = lista[index];
+                txtcodigo.Text = Convert.ToString(lista[index].getid());
+                txtfabricante.Text = Convert.ToString(lista[index].getId_productor());
+                txtnombre.Text = lista[index].getnombre();
+                txtPrecio.Text = Convert.ToString(lista[index].getprecio());
+                if (lista[index].getstock())
+                {
+                    ckbstock.Checked = true;
+                }
+                else
+                {
+                    ckbstock.Checked = false;
+                }
+                foto.Image = lista[index].byteArrayToImage();
+                txtcount.Text = "" + lista.Count();
+            }catch (Exception)
             {
-                ckbstock.Checked = false;
+                
             }
-            foto.Image = lista[index].byteArrayToImage();
-            txtcount.Text = "" + lista.Count();
         }
 
         public void aceptar()
         {
-            Boolean aux = ckbstock.Checked;
-            string auxs = txtnombre.Text;
-            int auxint = Convert.ToInt32(txtcodigo.Text);
-            char auxchar = Convert.ToChar(txtfabricante.Text);
-            float auxfloat = float.Parse(txtPrecio.Text);
-            Hardware h = new Hardware(auxs, auxchar, auxint, auxfloat, aux);
-            Image auxi = Image.FromFile(txtpath.Text);
-            h.imageToByteArray(auxi);
-            lista.Add(h);
-            cancelar();
+            Hardware h;
+            try
+            {
+
+
+                Boolean aux = ckbstock.Checked;
+                string auxs = txtnombre.Text;
+                int auxint = Convert.ToInt32(txtcodigo.Text);
+                char auxchar = Convert.ToChar(txtfabricante.Text);
+                float auxfloat = float.Parse(txtPrecio.Text);
+                h= new Hardware(auxs, auxchar, auxint, auxfloat, aux);
+                
+                try
+                {
+                    Image auxi = Image.FromFile(txtpath.Text);
+                    h.imageToByteArray(auxi);
+                }
+                catch (Exception) { }
+                lista.Add(h);
+
+                
+                cancelar();
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("Faltan datos por introducir(la foto es opcional)");
+            }
+           
         }
 
         public void cancelar()
@@ -119,7 +146,7 @@ namespace proyecto_wondows_form_1
 
                 fichero.Close();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("No se ha abierto el fichero");
             }
@@ -127,14 +154,13 @@ namespace proyecto_wondows_form_1
 
         private void cargar()
         {
-
             string nombre = "";
             char id_productor;
             int id = 0;
             float precio = 0;
             Boolean stock = false;
             int lon;
-            byte[] cab;
+            
 
             try
             {
@@ -142,13 +168,9 @@ namespace proyecto_wondows_form_1
                 int cont = fichero.ReadInt32();
                 for (int i = 0; i < cont; i++)
                 {
-
                     nombre = fichero.ReadString();
 
-
-
                     id_productor = fichero.ReadChar();
-
 
                     id = fichero.ReadInt32();
 
@@ -157,28 +179,29 @@ namespace proyecto_wondows_form_1
                     stock = fichero.ReadBoolean();
                     lon = fichero.ReadInt32();
 
-
                     byte[] b2 = fichero.ReadBytes(lon);
 
                     aniadir_cargar(nombre, id_productor, id, precio, stock, b2);
-
                 }
-                
 
                 fichero.Close();
                 txtcount.Text = "" + lista.Count();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 MessageBox.Show("No se ha abierto el fichero");
             }
         }
 
-
-
-        public void aniadir_cargar(string nombre, char id_p, int id, float precio, Boolean stock, byte[] b)
+        public void aniadir_cargar(
+            string nombre,
+            char id_p,
+            int id,
+            float precio,
+            Boolean stock,
+            byte[] b
+        )
         {
-
             Hardware j = new Hardware(nombre, id_p, id, precio, stock, b);
             lista.Add(j);
         }
@@ -207,16 +230,12 @@ namespace proyecto_wondows_form_1
             {
                 if (index < lista.Count - 1)
                     index++;
-
             }
             mostrar();
         }
 
-       
-
         private void btncrear_Click(object sender, EventArgs e)
         {
-
             creacion();
         }
 
