@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             splitContainer1 = new SplitContainer();
+            btnguardar = new Button();
             txtcount = new TextBox();
             lblcount = new Label();
             btneliminar = new Button();
@@ -48,7 +49,7 @@
             lblpath = new Label();
             txtpath = new TextBox();
             foto = new PictureBox();
-            btnguardar = new Button();
+            btncargar = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(btncargar);
             splitContainer1.Panel1.Controls.Add(btnguardar);
             splitContainer1.Panel1.Controls.Add(txtcount);
             splitContainer1.Panel1.Controls.Add(lblcount);
@@ -90,6 +92,16 @@
             splitContainer1.Size = new Size(800, 450);
             splitContainer1.SplitterDistance = 266;
             splitContainer1.TabIndex = 0;
+            // 
+            // btnguardar
+            // 
+            btnguardar.Location = new Point(10, 298);
+            btnguardar.Name = "btnguardar";
+            btnguardar.Size = new Size(75, 23);
+            btnguardar.TabIndex = 16;
+            btnguardar.Text = "Guardar";
+            btnguardar.UseVisualStyleBackColor = true;
+            btnguardar.Click += button1_Click;
             // 
             // txtcount
             // 
@@ -262,15 +274,15 @@
             foto.TabIndex = 0;
             foto.TabStop = false;
             // 
-            // btnguardar
+            // btncargar
             // 
-            btnguardar.Location = new Point(10, 298);
-            btnguardar.Name = "btnguardar";
-            btnguardar.Size = new Size(75, 23);
-            btnguardar.TabIndex = 16;
-            btnguardar.Text = "Guardar";
-            btnguardar.UseVisualStyleBackColor = true;
-            btnguardar.Click += button1_Click;
+            btncargar.Location = new Point(174, 298);
+            btncargar.Name = "btncargar";
+            btncargar.Size = new Size(75, 23);
+            btncargar.TabIndex = 17;
+            btncargar.Text = "Importar";
+            btncargar.UseVisualStyleBackColor = true;
+            btncargar.Click += btncargar_Click;
             // 
             // Form1
             // 
@@ -313,5 +325,6 @@
         private Label lblcount;
         private TextBox txtcount;
         private Button btnguardar;
+        private Button btncargar;
     }
 }

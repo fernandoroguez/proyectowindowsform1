@@ -4,33 +4,21 @@ namespace proyecto_wondows_form_1
 {
     public partial class Form1 : Form
     {
-        
+
         List<Hardware> lista;
+
         int index = 0;
+
         Boolean crear = false;
+
         public Form1()
         {
             InitializeComponent();
             lista = new List<Hardware>();
-
-
-            //for (int i = 0; i < 12; i++)
-            //{
-            //    Hardware x = new Hardware("nvidia gforce 3060", 'N', i + 1, 300, true);
-            //    Image image2 = Image.FromFile("3060.jpeg");
-            //    x.imageToByteArray(image2);
-            //    lista.Add(x);
-            //}
-
-
             cargar();
             mostrar();
         }
 
-        public void aniadir()
-        {
-
-        }
 
         public void mostrar()
         {
@@ -81,6 +69,8 @@ namespace proyecto_wondows_form_1
             lblpath.Visible = false;
             btncrear.Enabled = true;
             btneliminar.Enabled = true;
+            btncargar.Enabled = true;
+            btnguardar.Enabled = true;
         }
 
         public void creacion()
@@ -92,6 +82,7 @@ namespace proyecto_wondows_form_1
             txtfabricante.Text = "";
             txtnombre.Text = "";
             txtPrecio.Text = "";
+            txtpath.Text = "";
             txtcodigo.ReadOnly = false;
             txtfabricante.ReadOnly = false;
             txtnombre.ReadOnly = false;
@@ -102,6 +93,94 @@ namespace proyecto_wondows_form_1
             lblpath.Visible = true;
             btneliminar.Enabled = false;
             btncrear.Enabled = false;
+            btnguardar.Enabled = false;
+            btncargar.Enabled = false;
+        }
+
+        private void guardar()
+        {
+            BinaryWriter fichero;
+
+            try
+            {
+                fichero = new BinaryWriter(File.Open("databank.data", FileMode.Create));
+                int cont = lista.Count;
+                fichero.Write(cont);
+                for (int i = 0; i < lista.Count; i++)
+                {
+                    fichero.Write(lista[i].getnombre());
+                    fichero.Write(lista[i].getId_productor());
+                    fichero.Write(lista[i].getid());
+                    fichero.Write(lista[i].getprecio());
+                    fichero.Write(lista[i].getstock());
+                    fichero.Write(lista[i].getlenght());
+                    fichero.Write(lista[i].getfoto());
+                }
+
+                fichero.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha abierto el fichero");
+            }
+        }
+
+        private void cargar()
+        {
+
+            string nombre = "";
+            char id_productor;
+            int id = 0;
+            float precio = 0;
+            Boolean stock = false;
+            int lon;
+            byte[] cab;
+
+            try
+            {
+                BinaryReader fichero = new BinaryReader(File.Open("databank.data", FileMode.Open));
+                int cont = fichero.ReadInt32();
+                for (int i = 0; i < cont; i++)
+                {
+
+                    nombre = fichero.ReadString();
+
+
+
+                    id_productor = fichero.ReadChar();
+
+
+                    id = fichero.ReadInt32();
+
+                    precio = fichero.ReadSingle();
+
+                    stock = fichero.ReadBoolean();
+                    lon = fichero.ReadInt32();
+
+
+                    byte[] b2 = fichero.ReadBytes(lon);
+
+                    aniadir_cargar(nombre, id_productor, id, precio, stock, b2);
+
+                }
+                
+
+                fichero.Close();
+                txtcount.Text = "" + lista.Count();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("No se ha abierto el fichero");
+            }
+        }
+
+
+
+        public void aniadir_cargar(string nombre, char id_p, int id, float precio, Boolean stock, byte[] b)
+        {
+
+            Hardware j = new Hardware(nombre, id_p, id, precio, stock, b);
+            lista.Add(j);
         }
 
         private void btnatras_Click(object sender, EventArgs e)
@@ -133,98 +212,9 @@ namespace proyecto_wondows_form_1
             mostrar();
         }
 
-        private void guardar()
-        {
-            BinaryWriter fichero;
-            
-            try
-            {
-                fichero = new BinaryWriter(File.Open("databank.data",FileMode.Create));
-                int cont = lista.Count;
-                fichero.Write(cont);
-                //MessageBox.Show("" + cont);
-                for(int i = 0; i < lista.Count; i++)
-                {
-                    fichero.Write(lista[i].getnombre());
-                    fichero.Write(lista[i].getId_productor());
-                    fichero.Write(lista[i].getid());
-                    fichero.Write(lista[i].getprecio());
-                    fichero.Write(lista[i].getstock());
-                    fichero.Write(lista[i].getlenght());
-                    fichero.Write(lista[i].getfoto());
-                    //byte[] b = new byte[lista[i].getlenght()];
-                    //fichero.Write(lista[i].getfoto());
-                    //MessageBox.Show("guardado" + (i+1));
-                }
+       
 
-                fichero.Close();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show("No se ha abierto el fichero");
-            }
-        }
-
-        private void cargar()
-        {
-
-            string nombre = "";
-            char id_productor;
-            int id = 0;
-            float precio = 0;
-            Boolean stock = false;
-            int lon;
-            byte[] cab;
-
-            try
-            {
-                BinaryReader fichero = new BinaryReader(File.Open("databank.data", FileMode.Open));
-                int cont = fichero.ReadInt32();
-                //MessageBox.Show("hay " + cont);
-                for (int i = 0; i < cont; i++)
-                {
-
-                     nombre = fichero.ReadString();
-
-
-
-                     id_productor = fichero.ReadChar();
-
-
-                    id = fichero.ReadInt32();
-
-                     precio = fichero.ReadSingle();
-
-                    stock = fichero.ReadBoolean();
-                lon = fichero.ReadInt32();
-
-
-                byte[] b2 = fichero.ReadBytes(lon);
-
-                aniadir_cargar(nombre, id_productor, id, precio, stock, b2);
-               // MessageBox.Show("" + (i + 1));
-
-                }
-
-                fichero.Close();
-            txtcount.Text = "" + lista.Count();
-        }
-            catch (Exception e)
-            {
-                MessageBox.Show("No se ha abierto el fichero");
-            }
-}
-
-
-
-        public void aniadir_cargar(string nombre, char id_p, int id, float precio, Boolean stock, byte[] b)
-            {
-
-                Hardware j = new Hardware(nombre, id_p, id, precio, stock, b);
-                lista.Add(j);
-            }
-
-            private void btncrear_Click(object sender, EventArgs e)
+        private void btncrear_Click(object sender, EventArgs e)
         {
 
             creacion();
@@ -240,6 +230,11 @@ namespace proyecto_wondows_form_1
         private void button1_Click(object sender, EventArgs e)
         {
             guardar();
+        }
+
+        private void btncargar_Click(object sender, EventArgs e)
+        {
+            cargar();
         }
     }
 }

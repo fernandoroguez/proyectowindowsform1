@@ -71,7 +71,7 @@
             imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
             foto = ms.ToArray();
             tamfoto=foto.Length;
-           // MessageBox.Show("" + tamfoto);
+          
         }
         public Image byteArrayToImage()
         {
