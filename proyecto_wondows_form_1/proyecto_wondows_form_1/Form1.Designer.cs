@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             splitContainer1 = new SplitContainer();
+            btnmodificar = new Button();
+            btncargar = new Button();
             btnguardar = new Button();
             txtcount = new TextBox();
             lblcount = new Label();
@@ -46,10 +48,11 @@
             lblCodigo = new Label();
             lblFabricante = new Label();
             lblNombre = new Label();
+            btnfiles = new Button();
             lblpath = new Label();
             txtpath = new TextBox();
             foto = new PictureBox();
-            btncargar = new Button();
+            openFileDialog1 = new OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -65,6 +68,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(btnmodificar);
             splitContainer1.Panel1.Controls.Add(btncargar);
             splitContainer1.Panel1.Controls.Add(btnguardar);
             splitContainer1.Panel1.Controls.Add(txtcount);
@@ -86,12 +90,34 @@
             // 
             // splitContainer1.Panel2
             // 
+            splitContainer1.Panel2.Controls.Add(btnfiles);
             splitContainer1.Panel2.Controls.Add(lblpath);
             splitContainer1.Panel2.Controls.Add(txtpath);
             splitContainer1.Panel2.Controls.Add(foto);
             splitContainer1.Size = new Size(800, 450);
             splitContainer1.SplitterDistance = 266;
             splitContainer1.TabIndex = 0;
+            // 
+            // btnmodificar
+            // 
+            btnmodificar.Enabled = false;
+            btnmodificar.Location = new Point(91, 255);
+            btnmodificar.Name = "btnmodificar";
+            btnmodificar.Size = new Size(75, 23);
+            btnmodificar.TabIndex = 18;
+            btnmodificar.Text = "modificar";
+            btnmodificar.UseVisualStyleBackColor = true;
+            btnmodificar.Click += btnmodificar_Click;
+            // 
+            // btncargar
+            // 
+            btncargar.Location = new Point(174, 298);
+            btncargar.Name = "btncargar";
+            btncargar.Size = new Size(75, 23);
+            btncargar.TabIndex = 17;
+            btncargar.Text = "Importar";
+            btncargar.UseVisualStyleBackColor = true;
+            btncargar.Click += btncargar_Click;
             // 
             // btnguardar
             // 
@@ -247,6 +273,17 @@
             lblNombre.TabIndex = 0;
             lblNombre.Text = "Nombre";
             // 
+            // btnfiles
+            // 
+            btnfiles.Location = new Point(150, 384);
+            btnfiles.Name = "btnfiles";
+            btnfiles.Size = new Size(134, 23);
+            btnfiles.TabIndex = 3;
+            btnfiles.Text = "seleccionar archivo";
+            btnfiles.UseVisualStyleBackColor = true;
+            btnfiles.Visible = false;
+            btnfiles.Click += btnfiles_Click;
+            // 
             // lblpath
             // 
             lblpath.AutoSize = true;
@@ -274,15 +311,9 @@
             foto.TabIndex = 0;
             foto.TabStop = false;
             // 
-            // btncargar
+            // openFileDialog1
             // 
-            btncargar.Location = new Point(174, 298);
-            btncargar.Name = "btncargar";
-            btncargar.Size = new Size(75, 23);
-            btncargar.TabIndex = 17;
-            btncargar.Text = "Importar";
-            btncargar.UseVisualStyleBackColor = true;
-            btncargar.Click += btncargar_Click;
+            openFileDialog1.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -326,5 +357,8 @@
         private TextBox txtcount;
         private Button btnguardar;
         private Button btncargar;
+        private Button btnfiles;
+        private OpenFileDialog openFileDialog1;
+        private Button btnmodificar;
     }
 }

@@ -15,6 +15,42 @@
         int tamfoto;
         byte[]? foto;
 
+        public string Nombre
+        {
+            get { return nombre; }
+            set { nombre = value; }
+        }
+        public char IdProductor
+        {
+            get { return id_productor;}
+            set { id_productor = value; }
+        }
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public float Precio
+        {
+            get { return precio; }
+            set { precio = value; }
+        }
+        public Boolean Stock
+        {
+            get { return stock; }
+            set { stock = value; }
+        }
+        public int Tamfoto
+        {
+            get { return tamfoto; }
+            
+        }
+        public byte[] Foto
+        {
+            get { return foto; }
+            set {  foto = value; }
+        }
+
         public Hardware(string nombre, char id, int almacen, float precio, bool stock)
         {
             this.nombre = nombre;
@@ -23,6 +59,7 @@
             this.precio = precio;
             this.stock = stock;
         }
+
 
         public Hardware(string nombre, char id, int almacen, float precio, bool stock, byte[] b)
         {
@@ -35,45 +72,8 @@
             tamfoto = b.Length;
         }
 
-        public string getnombre()
-        {
-            return nombre;
-        }
 
-        public char getId_productor()
-        {
-            return id_productor;
-        }
 
-        public int getid()
-        {
-            return id;
-        }
-
-        public float getprecio()
-        {
-            return precio;
-        }
-
-        public Boolean getstock()
-        {
-            return stock;
-        }
-
-        public int getlenght()
-        {
-            return tamfoto;
-        }
-
-        public byte[] getfoto()
-        {
-            return foto;
-        }
-
-        public void setnombre()
-        {
-
-        }
         public void imageToByteArray(System.Drawing.Image imageIn)
         {
             MemoryStream ms = new MemoryStream();

@@ -5,34 +5,37 @@ namespace proyecto_wondows_form_1
     public partial class Form1 : Form
     {
 
-       
+
         List<Hardware> lista;
 
         int index = 0;
 
         Boolean crear = false;
+        Boolean mod = false;
 
         public Form1()
         {
             InitializeComponent();
             lista = new List<Hardware>();
             //en cuanto inicio el programa lo primero que hago es cargar los archivos del fichero
-           // cargar();
+            cargar();
             mostrar();
+            this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
+
         }
 
         public void mostrar()
         {
             try
             {
-                
+
 
                 Hardware h = lista[index];
-                txtcodigo.Text = Convert.ToString(lista[index].getid());
-                txtfabricante.Text = Convert.ToString(lista[index].getId_productor());
-                txtnombre.Text = lista[index].getnombre();
-                txtPrecio.Text = Convert.ToString(lista[index].getprecio());
-                if (lista[index].getstock())
+                txtcodigo.Text = Convert.ToString(lista[index].Id);
+                txtfabricante.Text = Convert.ToString(lista[index].IdProductor);
+                txtnombre.Text = lista[index].Nombre;
+                txtPrecio.Text = Convert.ToString(lista[index].Precio);
+                if (lista[index].Stock)
                 {
                     ckbstock.Checked = true;
                 }
@@ -42,15 +45,16 @@ namespace proyecto_wondows_form_1
                 }
                 foto.Image = lista[index].byteArrayToImage();
                 txtcount.Text = "" + lista.Count();
-            }catch (Exception)
+            }
+            catch (Exception)
             {
-                
+
             }
         }
-
         public void aceptar()
         {
             Hardware h;
+
             try
             {
 
@@ -60,8 +64,8 @@ namespace proyecto_wondows_form_1
                 int auxint = Convert.ToInt32(txtcodigo.Text);
                 char auxchar = Convert.ToChar(txtfabricante.Text);
                 float auxfloat = float.Parse(txtPrecio.Text);
-                h= new Hardware(auxs, auxchar, auxint, auxfloat, aux);
-                
+                h = new Hardware(auxs, auxchar, auxint, auxfloat, aux);
+
                 try
                 {
                     Image auxi = Image.FromFile(txtpath.Text);
@@ -70,14 +74,14 @@ namespace proyecto_wondows_form_1
                 catch (Exception) { }
                 lista.Add(h);
 
-                
+
                 cancelar();
             }
-            catch(Exception)
+            catch (Exception)
             {
                 MessageBox.Show("Faltan datos por introducir(la foto es opcional)");
             }
-           
+
         }
 
         public void cancelar()
@@ -98,18 +102,32 @@ namespace proyecto_wondows_form_1
             btneliminar.Enabled = true;
             btncargar.Enabled = true;
             btnguardar.Enabled = true;
+            btnfiles.Visible = false;
+            mod = false;
+            if (lista.Count == 0)
+            {
+                desactivar_mod();
+            }
+            else
+            {
+                activar_mod();
+            }
         }
 
-        public void creacion()
+        public void vaciado()
         {
-            crear = true;
-            btnsiguiente.Text = "Aceptar";
-            btnatras.Text = "Cancelar";
             txtcodigo.Text = "";
             txtfabricante.Text = "";
             txtnombre.Text = "";
             txtPrecio.Text = "";
             txtpath.Text = "";
+        }
+
+        public void creacion()
+        {
+
+            btnsiguiente.Text = "Aceptar";
+            btnatras.Text = "Cancelar";
             txtcodigo.ReadOnly = false;
             txtfabricante.ReadOnly = false;
             txtnombre.ReadOnly = false;
@@ -122,6 +140,7 @@ namespace proyecto_wondows_form_1
             btncrear.Enabled = false;
             btnguardar.Enabled = false;
             btncargar.Enabled = false;
+            btnfiles.Visible = true;
         }
 
         private void guardar()
@@ -135,21 +154,37 @@ namespace proyecto_wondows_form_1
                 fichero.Write(cont);
                 for (int i = 0; i < lista.Count; i++)
                 {
-                    fichero.Write(lista[i].getnombre());
-                    fichero.Write(lista[i].getId_productor());
-                    fichero.Write(lista[i].getid());
-                    fichero.Write(lista[i].getprecio());
-                    fichero.Write(lista[i].getstock());
-                    fichero.Write(lista[i].getlenght());
-                    fichero.Write(lista[i].getfoto());
+                    fichero.Write(lista[i].Nombre);
+                    fichero.Write(lista[i].IdProductor);
+                    fichero.Write(lista[i].Id);
+                    fichero.Write(lista[i].Precio);
+                    fichero.Write(lista[i].Stock);
+                    fichero.Write(lista[i].Tamfoto);
+                    fichero.Write(lista[i].Foto);
                 }
 
                 fichero.Close();
             }
             catch (Exception)
             {
-                MessageBox.Show("No se ha abierto el fichero");
+                MessageBox.Show("No se ha abierto el fichero para guardar");
             }
+        }
+
+        private void activar_mod()
+        {
+            btnmodificar.Enabled = true;
+        }
+
+        private void desactivar_mod()
+        {
+            btnmodificar.Enabled = false;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            guardar();
         }
 
         private void cargar()
@@ -160,7 +195,7 @@ namespace proyecto_wondows_form_1
             float precio = 0;
             Boolean stock = false;
             int lon;
-            
+
 
             try
             {
@@ -206,9 +241,34 @@ namespace proyecto_wondows_form_1
             lista.Add(j);
         }
 
+        public void modificar()
+        {
+            lista[index].Stock = ckbstock.Checked;
+            lista[index].Nombre = txtnombre.Text;
+            lista[index].Id = Convert.ToInt32(txtcodigo.Text);
+            lista[index].IdProductor = Convert.ToChar(txtfabricante.Text);
+            lista[index].Precio = float.Parse(txtPrecio.Text);
+
+
+            try
+            {
+                Image? auxi = Image.FromFile(txtpath.Text);
+                lista[index].imageToByteArray(auxi);
+
+            }
+            catch (Exception) { }
+
+
+
+
+
+            cancelar();
+
+        }
+
         private void btnatras_Click(object sender, EventArgs e)
         {
-            if (crear)
+            if (crear || mod)
             {
                 cancelar();
             }
@@ -226,6 +286,10 @@ namespace proyecto_wondows_form_1
             {
                 aceptar();
             }
+            else if (mod)
+            {
+                modificar();
+            }
             else
             {
                 if (index < lista.Count - 1)
@@ -236,6 +300,8 @@ namespace proyecto_wondows_form_1
 
         private void btncrear_Click(object sender, EventArgs e)
         {
+            crear = true;
+            vaciado();
             creacion();
         }
 
@@ -243,6 +309,14 @@ namespace proyecto_wondows_form_1
         {
             lista.RemoveAt(index);
             index = 0;
+            if (lista.Count == 0)
+            {
+                desactivar_mod();
+            }
+            else
+            {
+                activar_mod();
+            }
             mostrar();
         }
 
@@ -254,6 +328,26 @@ namespace proyecto_wondows_form_1
         private void btncargar_Click(object sender, EventArgs e)
         {
             cargar();
+        }
+
+        private void btnfiles_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = "C:\\";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string str_RutaArchivo = openFileDialog1.FileName;
+                    txtpath.Text = str_RutaArchivo;
+                }
+                catch (Exception) { }
+            }
+        }
+
+        private void btnmodificar_Click(object sender, EventArgs e)
+        {
+            mod = true;
+            creacion();
         }
     }
 }
