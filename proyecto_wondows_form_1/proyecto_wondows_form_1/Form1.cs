@@ -20,6 +20,7 @@ namespace proyecto_wondows_form_1
             //en cuanto inicio el programa lo primero que hago es cargar los archivos del fichero
             cargar();
             mostrar();
+            act_modificar();
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
 
         }
@@ -104,14 +105,7 @@ namespace proyecto_wondows_form_1
             btnguardar.Enabled = true;
             btnfiles.Visible = false;
             mod = false;
-            if (lista.Count == 0)
-            {
-                desactivar_mod();
-            }
-            else
-            {
-                activar_mod();
-            }
+            act_modificar();
         }
 
         public void vaciado()
@@ -180,6 +174,19 @@ namespace proyecto_wondows_form_1
         {
             btnmodificar.Enabled = false;
         }
+
+        public void act_modificar()
+        {
+            if (lista.Count > 0)
+            {
+                btnmodificar.Enabled=true;
+            }
+            else
+            {
+                btnmodificar.Enabled=false;
+            }
+        }
+
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -317,6 +324,7 @@ namespace proyecto_wondows_form_1
             {
                 activar_mod();
             }
+            act_modificar();
             mostrar();
         }
 
