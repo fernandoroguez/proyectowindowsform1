@@ -127,7 +127,7 @@
             btnguardar.TabIndex = 16;
             btnguardar.Text = "Guardar";
             btnguardar.UseVisualStyleBackColor = true;
-            btnguardar.Click += button1_Click;
+            btnguardar.Click += btnguardar_Click;
             // 
             // txtcount
             // 
@@ -164,7 +164,7 @@
             btncrear.TabIndex = 12;
             btncrear.Text = "Crear";
             btncrear.UseVisualStyleBackColor = true;
-            btncrear.Click += btncrear_Click;
+            btncrear.Click += button1_Click;
             // 
             // btnsiguiente
             // 
@@ -178,6 +178,7 @@
             // 
             // btnatras
             // 
+            btnatras.Enabled = false;
             btnatras.Location = new Point(10, 207);
             btnatras.Name = "btnatras";
             btnatras.Size = new Size(75, 23);

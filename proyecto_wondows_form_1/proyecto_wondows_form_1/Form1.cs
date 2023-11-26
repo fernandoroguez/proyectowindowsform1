@@ -17,10 +17,10 @@ namespace proyecto_wondows_form_1
         {
             InitializeComponent();
             lista = new List<Hardware>();
-            //en cuanto inicio el programa lo primero que hago es cargar los archivos del fichero
             cargar();
             mostrar();
-            act_modificar();
+            act_lista_vacia();
+            btnatras.Enabled = false;
             this.FormClosing += new FormClosingEventHandler(Form1_FormClosing);
 
         }
@@ -45,7 +45,10 @@ namespace proyecto_wondows_form_1
                     ckbstock.Checked = false;
                 }
                 foto.Image = lista[index].byteArrayToImage();
-                txtcount.Text = "" + lista.Count();
+               
+               
+                    txtcount.Text = "" + lista.Count();
+                
             }
             catch (Exception)
             {
@@ -105,7 +108,7 @@ namespace proyecto_wondows_form_1
             btnguardar.Enabled = true;
             btnfiles.Visible = false;
             mod = false;
-            act_modificar();
+            act_lista_vacia();
         }
 
         public void vaciado()
@@ -115,6 +118,7 @@ namespace proyecto_wondows_form_1
             txtnombre.Text = "";
             txtPrecio.Text = "";
             txtpath.Text = "";
+            foto.Image = null;
         }
 
         public void creacion()
@@ -127,6 +131,8 @@ namespace proyecto_wondows_form_1
             txtnombre.ReadOnly = false;
             txtPrecio.ReadOnly = false;
             ckbstock.AutoCheck = true;
+            btnsiguiente.Enabled = true;
+            btnatras.Enabled = true;
             foto.Visible = false;
             txtpath.Visible = true;
             lblpath.Visible = true;
@@ -165,25 +171,24 @@ namespace proyecto_wondows_form_1
             }
         }
 
-        private void activar_mod()
-        {
-            btnmodificar.Enabled = true;
-        }
 
-        private void desactivar_mod()
-        {
-            btnmodificar.Enabled = false;
-        }
 
-        public void act_modificar()
+        public void act_lista_vacia()
         {
             if (lista.Count > 0)
             {
                 btnmodificar.Enabled=true;
+                btneliminar.Enabled=true;
+                btnatras.Enabled=true;
+                btnsiguiente.Enabled=true;
             }
             else
             {
                 btnmodificar.Enabled=false;
+                btneliminar.Enabled = false;
+                btnatras.Enabled = false;
+                btnsiguiente.Enabled = false;
+                txtcount.Text = "0";
             }
         }
 
@@ -281,9 +286,26 @@ namespace proyecto_wondows_form_1
             }
             else
             {
+                btnsiguiente.Enabled = true;
                 if (index > 0)
+                
+                   
                     index--;
+                
+                
+                if (index > 0)
+                {
+                    btnatras.Enabled = true;
+                   
+                }
+                else
+                {
+                    btnatras.Enabled = false;
+                }
+
+
             }
+            
             mostrar();
         }
 
@@ -299,13 +321,32 @@ namespace proyecto_wondows_form_1
             }
             else
             {
+                btnatras.Enabled = true;
+                index++;
                 if (index < lista.Count - 1)
-                    index++;
+                {
+                    
+                    btnsiguiente.Enabled = true;
+                }
+                else
+                {
+                    btnsiguiente.Enabled = false;
+                }
+                
+                   
+               
             }
+            
             mostrar();
         }
 
-        private void btncrear_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            crear = true;
+            vaciado();
+            creacion();
+        }
+        private void btnceear_CLick(object sender, EventArgs e)
         {
             crear = true;
             vaciado();
@@ -316,26 +357,21 @@ namespace proyecto_wondows_form_1
         {
             lista.RemoveAt(index);
             index = 0;
-            if (lista.Count == 0)
-            {
-                desactivar_mod();
-            }
-            else
-            {
-                activar_mod();
-            }
-            act_modificar();
+            act_lista_vacia();
+            vaciado();
             mostrar();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnguardar_Click(object sender, EventArgs e)
         {
             guardar();
+            act_lista_vacia();
         }
 
         private void btncargar_Click(object sender, EventArgs e)
         {
             cargar();
+            act_lista_vacia();
         }
 
         private void btnfiles_Click(object sender, EventArgs e)
